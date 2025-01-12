@@ -1,0 +1,40 @@
+name: 🛠️ CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: 🔮 CI Pipeline
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+      pull-requests: write
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: ⚙️ Set up environment
+        uses: ./.github/actions/setup
+
+      - name: 🔍 Lint the Codebase
+        run: |
+          pnpm run lint
+
+      - name: 🏗️ Build Project
+        run: |
+          pnpm run build
+
+      - name: 🧪 Run Unit Tests
+        run: |
+          pnpm run test

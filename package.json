@@ -1,11 +1,16 @@
 {
-  "name": "oms",
+  "name": "oms-engine",
   "version": "0.0.0",
   "description": "oms-engine is a backend system designed for efficient order management and validation.",
   "main": "src/index.ts",
+  "engines": {
+    "node": "~23.5.0"
+  },
   "scripts": {
     "start": "nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --debug src/**",
+    "build": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,11 +24,16 @@
   "homepage": "https://github.com/abhinavmsra/oms-engine#readme",
   "devDependencies": {
     "@eslint/js": "^9.18.0",
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.19.1"
-  }
+  },
+  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }
