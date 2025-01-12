@@ -1,0 +1,29 @@
+{
+  "name": "oms",
+  "version": "0.0.0",
+  "description": "oms-engine is a backend system designed for efficient order management and validation.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "nodemon src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhinavmsra/oms-engine.git"
+  },
+  "author": "Abhinav Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhinavmsra/oms-engine/issues"
+  },
+  "homepage": "https://github.com/abhinavmsra/oms-engine#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.19.1"
+  }
+}

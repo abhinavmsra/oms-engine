@@ -1,0 +1,23 @@
+{
+	"name": "Node",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "dev",
+	"workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash",
+						"icon": "terminal-bash"
+					}
+				}
+			}
+		}
+	}
+}
