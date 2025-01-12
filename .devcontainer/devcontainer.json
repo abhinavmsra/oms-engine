@@ -15,6 +15,11 @@
 					"bash": {
 						"path": "bash",
 						"icon": "terminal-bash"
+					},
+					"psql": {
+						"path": "bash",
+						"args": ["-c", "psql -U app -h db -d oms_development"],
+						"icon": "database"
 					}
 				}
 			}
