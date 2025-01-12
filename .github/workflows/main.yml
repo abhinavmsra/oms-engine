@@ -32,6 +32,10 @@ jobs:
           node-version-file: 'package.json'
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install
+        shell: bash
+
       - name: 🔍 Lint the Codebase
         run: |
           pnpm run lint
