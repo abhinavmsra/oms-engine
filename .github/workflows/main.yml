@@ -24,17 +24,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-        shell: bash
+      - name: ⚙️ Set up environment
+        uses: ./.github/actions/setup
 
       - name: 🔍 Lint the Codebase
         run: |

@@ -1,0 +1,56 @@
+---
+  name: 🚀 Release
+
+  on:
+    pull_request:
+      types:
+        - closed
+      branches:
+        - main
+
+  jobs:
+    release:
+      name: release
+      runs-on: ubuntu-latest
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      outputs:
+        new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+        new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+      steps:
+        - name: 📥 Checkout Code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+
+        - name: ⚙️ Set up environment
+          uses: ./.github/actions/setup
+
+        - name: 📝 Configure CI Git User
+          run: |
+            git remote set-url origin https://${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+            git config --global user.email hey@abhi.dev
+            git config --global user.name Abhinav Mishra
+
+        - name: Semantic Release
+          uses: cycjimmy/semantic-release-action@v4
+          id: semantic
+          with:
+            branches: |
+              [
+                'main'
+              ]
+            extra_plugins: |
+              @semantic-release/changelog@6.0.3
+              @semantic-release/git
+          env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+        - name: Info
+          if: steps.semantic.outputs.new_release_published == 'true'
+          run: |
+            echo ${{ steps.semantic.outputs.new_release_version }}
+            echo ${{ steps.semantic.outputs.new_release_major_version }}
+            echo ${{ steps.semantic.outputs.new_release_minor_version }}
+            echo ${{ steps.semantic.outputs.new_release_patch_version }}
