@@ -1,5 +1,5 @@
-import Router from "express-promise-router";
-import { verify } from "../controllers/orders";
+import Router from 'express-promise-router';
+import { verify } from '../controllers/orders';
 
 const router = Router();
 

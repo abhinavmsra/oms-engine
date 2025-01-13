@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
@@ -18,7 +18,7 @@ app.use('/api', healthCheckRouter); // Health check endpoint
 app.use('/api/v1/orders', ordersRouter); // orders endpoint
 
 // Centralized Error Handling Middleware
-app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response) => {
   console.error('Unhandled error:', err);
   res.status(500).json({ error: 'Something went wrong. Please try again later.' });
 });

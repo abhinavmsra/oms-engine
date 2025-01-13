@@ -1,5 +1,5 @@
-import Router from "express-promise-router";
-import { ping } from "../controllers/healthCheck";
+import Router from 'express-promise-router';
+import { ping } from '../controllers/healthCheck';
 
 const router = Router();
 
