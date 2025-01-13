@@ -1,3 +1,15 @@
+## [1.0.1](https://github.com/abhinavmsra/oms-engine/compare/v1.0.0...v1.0.1) (2025-01-13)
+
+
+### Bug Fixes
+
+* [ISSUE-2] add baseline migration & seeds ([1a3d132](https://github.com/abhinavmsra/oms-engine/commit/1a3d13213c5098cf004a38612cfb4627cd67522c))
+* [ISSUE-2] add baseline migrations ([7e57a89](https://github.com/abhinavmsra/oms-engine/commit/7e57a893b56c29bde81c342eec24b0f11cd43dc2))
+* [ISSUE-2] add database in docker compose ([9be633c](https://github.com/abhinavmsra/oms-engine/commit/9be633c2b7da1befae423577d7d6a8268bccb444))
+* [ISSUE-2] add GH workflow to test migrations ([ab9fb10](https://github.com/abhinavmsra/oms-engine/commit/ab9fb10921242ef772c276c8da816df28faf4900))
+* [ISSUE-2] add README file with migrations & seeds details ([e22b610](https://github.com/abhinavmsra/oms-engine/commit/e22b610a6a43dd1ed8c62ec3cf82f4750ff0a2d2))
+* [ISSUE-2] fix lint issues ([119980e](https://github.com/abhinavmsra/oms-engine/commit/119980e74048494f892253fafc7bf6a7be55e5b5))
+
 # 1.0.0 (2025-01-12)
 
 
