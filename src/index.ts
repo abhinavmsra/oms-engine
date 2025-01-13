@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import healthCheckRouter from './routes/healthCheck';
+import ordersRouter from './routes/orders';
 
 // Initialize the Express app
 const app = express();
@@ -12,8 +13,9 @@ app.use(helmet()); // Basic security headers
 app.use(express.json()); // Parse incoming JSON requests
 app.use(morgan('combined')); // HTTP logger
 
-// Health check endpoint
-app.use('/api', healthCheckRouter);
+// Routes
+app.use('/api', healthCheckRouter); // Health check endpoint
+app.use('/api/v1/orders', ordersRouter); // orders endpoint
 
 // Centralized Error Handling Middleware
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
