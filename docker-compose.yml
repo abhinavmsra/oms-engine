@@ -4,6 +4,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./:/app
+    environment:
+      DATABASE_URL: postgres://app:5432@db/oms_development
     command: tail -f /dev/null
 
   db:
