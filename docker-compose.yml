@@ -4,4 +4,19 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./:/app
+    environment:
+      DATABASE_URL: postgres://app:5432@db/oms_development
     command: tail -f /dev/null
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_DB: oms_development
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
