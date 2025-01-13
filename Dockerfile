@@ -9,5 +9,6 @@ RUN apt update -y \
   && cargo --version \
   && cargo install sqlx-cli --no-default-features --features native-tls,postgres
 
-
 RUN corepack enable pnpm && corepack use pnpm@latest-10
+
+WORKDIR /app
