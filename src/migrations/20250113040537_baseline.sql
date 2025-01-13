@@ -47,7 +47,8 @@ BEGIN;
       lattitude double precision NOT NULL,
       longitude double precision NOT NULL,
       created_at timestamp without time zone NOT NULL DEFAULT NOW(),
-      PRIMARY KEY (id)
+      PRIMARY KEY (id),
+      UNIQUE (lattitude, longitude)
   );
 
   CREATE TABLE IF NOT EXISTS public.warehouse_shipping_rates
@@ -79,7 +80,8 @@ BEGIN;
       amount integer NOT NULL DEFAULT 0,
       created_at timestamp without time zone NOT NULL DEFAULT NOW(),
       updated_at timestamp without time zone NOT NULL DEFAULT NOW(),
-      PRIMARY KEY (id)
+      PRIMARY KEY (id),
+      UNIQUE (warehouse_id, product_id)
   );
 
   CREATE TABLE IF NOT EXISTS public.orders
@@ -102,7 +104,8 @@ BEGIN;
       subtotal numeric NOT NULL DEFAULT 0,
       promotion_rule_id integer,
       total numeric NOT NULL DEFAULT 0,
-      PRIMARY KEY (id)
+      PRIMARY KEY (id),
+      UNIQUE (order_id, product_id)
   );
 
   CREATE TABLE IF NOT EXISTS public.shipments
@@ -115,7 +118,8 @@ BEGIN;
       updated_at timestamp without time zone NOT NULL DEFAULT NOW(),
       quantity integer NOT NULL DEFAULT 0,
       warehouse_shipping_rate_id integer NOT NULL,
-      PRIMARY KEY (id)
+      PRIMARY KEY (id),
+      UNIQUE (warehouse_id, order_item_id)
   );
 
   ALTER TABLE IF EXISTS public.promotion_rules
