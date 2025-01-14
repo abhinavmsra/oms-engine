@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -12,6 +13,7 @@ const app = express();
 app.use(helmet()); // Basic security headers
 app.use(express.json()); // Parse incoming JSON requests
 app.use(morgan('combined')); // HTTP logger
+app.use(cors());
 
 // Routes
 app.use('/api', healthCheckRouter); // Health check endpoint
@@ -20,7 +22,18 @@ app.use('/api/v1/orders', ordersRouter); // orders endpoint
 // Centralized Error Handling Middleware
 app.use((err: Error, _req: Request, res: Response) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Something went wrong. Please try again later.' });
+  res.status(500).json(
+    {
+      errors: [
+        {
+          status: 500,
+          source: { pointer: '' },
+          title: 'Internal Server Error',
+          detail: 'Something went wrong. Please try again later.',
+        },
+      ],
+    },
+  );
 });
 
 // Graceful Shutdown Handling

@@ -116,6 +116,23 @@ This step seeds the database with initial data for development purposes.
 pnpm run test
 ```
 
+### 📖 API Documentation Access
+
+The Order Management System (OMS) provides interactive API documentation using Swagger UI.
+
+#### 🚀 Accessing the API Documentation
+
+The API documentation is served using a Swagger UI container. To access the documentation:
+
+- Open your browser and navigate to: http://localhost:8080
+
+- The Swagger UI will load the API documentation from the `./docs/apidocs.yml` file.
+
+
+#### 📦 Generating the API Docs:
+
+Ensure `apidocs.yml` file is up to date. It is managed manually for now.
+
 ### 🚀 Deployment
 
 To deploy the OMS system, you can use services like:

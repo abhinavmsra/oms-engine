@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Order Management System API
+  version: '1.0.0'
+  description: |
+    API for managing orders and order verification.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local Development Server
+
+defaultContentType: application/json
+
+tags:
+  - name: Orders
+    description: Endpoints related to order management
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: "order"
+            id:
+              type: integer
+              example: 1
+            attributes:
+              type: object
+              properties:
+                order_number:
+                  type: string
+                  example: "03e00701-2f83-4ffa-8ffe-f3f050ca3274"
+                subtotal:
+                  type: number
+                  example: 150
+                discount:
+                  type: number
+                  example: 0
+                total:
+                  type: number
+                  example: 150
+                quantity:
+                  type: integer
+                  example: 1
+                total_shipment_cost:
+                  type: number
+                  format: float
+                  example: 0.407054154218094
+            relationships:
+              type: object
+              properties:
+                shipments:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            example: "shipments"
+                          id:
+                            type: integer
+                            example: 1
+                          attributes:
+                            type: object
+                            properties:
+                              cost_per_kg_km:
+                                type: number
+                                example: 0.01
+                              total_shipment_cost:
+                                type: number
+                                format: float
+                                example: 0.407054154218094
+                              quantity:
+                                type: integer
+                                example: 1
+                              warehouse:
+                                type: string
+                                example: "Los Angeles"
+
+
+    OrderVerificationRequest:
+      type: object
+      required:
+        - count
+        - latitude
+        - longitude
+      properties:
+        count:
+          type: integer
+          example: 5
+        latitude:
+          type: number
+          format: float
+          example: 40.7128
+        longitude:
+          type: number
+          format: float
+          example: -74.0060
+
+    OrderVerificationResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            timestamp:
+              type: string
+              format: date-time
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: orderVerification
+            attributes:
+              type: object
+              properties:
+                isValid:
+                  type: boolean
+                subtotal:
+                  type: number
+                  format: float
+                discount:
+                  type: number
+                  format: float
+                total:
+                  type: number
+                  format: float
+                quantity:
+                  type: integer
+                totalShippingCost:
+                  type: number
+                  format: float
+            relationships:
+              type: object
+              properties:
+                shipments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      warehouse:
+                        type: string
+                        example: Warehouse A
+                      cost_per_kg_km:
+                        type: number
+                        example: 0.01
+                      total_shipment_cost:
+                        type: number
+                        format: float
+                        example: 25.00
+                      quantity:
+                        type: integer
+                        example: 5
+
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                    example: "/data/attributes/count"
+              title:
+                type: string
+                example: "Validation Error"
+              detail:
+                type: string
+                example: "count must be greater than or equal to 1"
+
+paths:
+  /api/v1/orders/verify:
+    get:
+      summary: Verify an order without saving it
+      tags:
+        - Orders
+      description: Verify if an order can be placed based on stock and shipping costs.
+      parameters:
+        - name: count
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 5
+        - name: latitude
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: longitude
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+      responses:
+        "200":
+          description: Order successfully verified
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderVerificationResponse"
+        "400":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders:
+    post:
+      summary: Create a new order
+      tags:
+        - Orders
+      description: Create a new order and store it in the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderVerificationRequest"
+      responses:
+        "200":
+          description: Order successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
