@@ -3,7 +3,7 @@ BEGIN;
   INSERT INTO warehouse_shipping_rates (id, cost_per_kg_km) VALUES (1, 0.01);
 
   -- Create locations
-  INSERT INTO locations (id, lattitude, longitude) VALUES
+  INSERT INTO locations (id, latitude, longitude) VALUES
     (1, 33.9425, -118.408056), -- Los Angeles
     (2, 40.639722, -73.778889), -- New York
     (3, -23.435556, -46.473056), -- São Paulo

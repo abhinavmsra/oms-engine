@@ -44,11 +44,11 @@ BEGIN;
   CREATE TABLE IF NOT EXISTS public.locations
   (
       id serial NOT NULL,
-      lattitude double precision NOT NULL,
+      latitude double precision NOT NULL,
       longitude double precision NOT NULL,
       created_at timestamp without time zone NOT NULL DEFAULT NOW(),
       PRIMARY KEY (id),
-      UNIQUE (lattitude, longitude)
+      UNIQUE (latitude, longitude)
   );
 
   CREATE TABLE IF NOT EXISTS public.warehouse_shipping_rates
