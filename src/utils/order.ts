@@ -5,10 +5,14 @@ const MAX_SHIPPING_COST_THRESHOLD = 0.15;
 
 export const calculateShippingCost = (shipment: UserShipment): number => {
   const distance = haversine(shipment.destination, shipment.origin, { unit: 'km' });
-  return shipment.quantity * (shipment.weightPerUnit / 1_000) * distance * shipment.ratePerKgPerKm;
+  return shipment.quantity * (shipment.weightPerUnit / 1_000) * Math.abs(distance) * shipment.ratePerKgPerKm;
 };
 
 export const checkOrderValidity = (order: UserOrder, warehouses: Warehouse[]): OrderValidity => {
+  if (order.quantity === 0) {
+    return { isValid: false, totalShippingCost: 0 };
+  }
+
   const destination = { latitude: order.latitude, longitude: order.longitude };
   let remainingQuantity = order.quantity;
   let totalShippingCost = 0;

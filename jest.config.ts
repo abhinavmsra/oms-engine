@@ -28,9 +28,16 @@ const config: Config = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: [
+    '.devcontainer',
+    '.github',
+    '.pnpm_store',
+    'config:init',
+    'coverage',
+    'node_modules',
+    'pgdata',
+    'tests/helpers',
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',

@@ -2,14 +2,11 @@ import { Pool, PoolClient, QueryConfig, QueryResult } from 'pg';
 
 let pool: Pool;
 
-/**
- * Initialize a single database pool connection
- */
 const initPool = (): void => {
   if (!pool) {
     pool = new Pool({
       connectionString: process.env.DATABASE_URL,
-      max: 10, // Adjust pool size based on your needs
+      max: 10, // Adjust pool size
       idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
     });
 
@@ -20,9 +17,6 @@ const initPool = (): void => {
   }
 };
 
-/**
- * Get a pool client
- */
 export const getClient = async (): Promise<PoolClient> => {
   try {
     initPool();
@@ -35,14 +29,9 @@ export const getClient = async (): Promise<PoolClient> => {
   }
 };
 
-/**
- * Run a query with automatic pool management
- * @param query - SQL query as string or prepared statement object
- * @param values - Optional values for parameterized queries
- */
 export const query = async (
   query: string | QueryConfig,
-  values?: any[],
+  values?: (string | number | boolean | null)[],
 ): Promise<QueryResult> => {
   initPool();
   try {
