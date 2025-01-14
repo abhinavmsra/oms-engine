@@ -50,7 +50,7 @@ export const verify = async (req: Request<VerifyParams>, res: Response): Promise
 };
 
 export const create = async (req: Request<VerifyParams>, res: Response): Promise<void> => {
-  const { error, value: validation } = orderRequestSchema.validate(req.query);
+  const { error, value: validation } = orderRequestSchema.validate(req.body);
   if (error) {
     res.status(400).json({
       errors: [

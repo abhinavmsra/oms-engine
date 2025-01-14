@@ -29,7 +29,7 @@ export const serializeOrderVerification = (userOrder: UserOrder, validity: Order
 export const serializeOrder = async (order: Order) => {
   const orderSummary = await fetchOrderSummary(order.id);
   const total_shipment_cost = orderSummary.shipments.reduce(
-    (acc, shipment) => { return acc + shipment.total_shipment_cost; },
+    (acc, shipment) => { return acc + +shipment.total_shipment_cost; },
     0,
   );
 
@@ -39,10 +39,10 @@ export const serializeOrder = async (order: Order) => {
       id: order.id,
       attributes: {
         order_number: order.order_number,
-        subtotal: orderSummary.subtotal,
-        discount: orderSummary.subtotal - orderSummary.total,
-        total: orderSummary.total,
-        quantity: orderSummary.quantity,
+        subtotal: +orderSummary.subtotal,
+        discount: (+orderSummary.subtotal) - (+orderSummary.total),
+        total: +orderSummary.total,
+        quantity: +orderSummary.quantity,
         total_shipment_cost,
       },
       relationships: {
@@ -52,9 +52,9 @@ export const serializeOrder = async (order: Order) => {
               type: 'shipments',
               id: shipment.id,
               attributes: {
-                cost_per_kg_km: shipment.cost_per_kg_km,
-                total_shipment_cost: shipment.total_shipment_cost,
-                quantity: shipment.quantity,
+                cost_per_kg_km: +shipment.cost_per_kg_km,
+                total_shipment_cost: +shipment.total_shipment_cost,
+                quantity: +shipment.quantity,
                 warehouse: shipment.warehouse_name,
               },
             };
