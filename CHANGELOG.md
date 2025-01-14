@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/abhinavmsra/oms-engine/compare/v1.2.0...v1.2.1) (2025-01-14)
+
+
+### Bug Fixes
+
+* [ISSUE-9] add swagger docs ([#12](https://github.com/abhinavmsra/oms-engine/issues/12)) ([04886b9](https://github.com/abhinavmsra/oms-engine/commit/04886b915b873faf648a360ca73ca98a11aefa03))
+
 # [1.2.0](https://github.com/abhinavmsra/oms-engine/compare/v1.1.0...v1.2.0) (2025-01-14)
 
 
