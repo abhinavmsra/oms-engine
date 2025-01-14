@@ -42,4 +42,12 @@ BEGIN;
     (2, 1, 50, 0.1, true),
     (3, 1, 100, 0.15, true),
     (4, 1, 250, 0.2, true);
+
+  SELECT setval('warehouse_shipping_rates_id_seq', (SELECT MAX(id) FROM warehouse_shipping_rates));
+  SELECT setval('locations_id_seq', (SELECT MAX(id) FROM locations));
+  SELECT setval('warehouses_id_seq', (SELECT MAX(id) FROM warehouses));
+  SELECT setval('products_id_seq', (SELECT MAX(id) FROM products));
+  SELECT setval('stocks_id_seq', (SELECT MAX(id) FROM stocks));
+  SELECT setval('promotions_id_seq', (SELECT MAX(id) FROM promotions));
+  SELECT setval('promotion_rules_id_seq', (SELECT MAX(id) FROM promotion_rules));
 END;

@@ -1,5 +1,5 @@
 import haversine from 'haversine';
-import { OrderValidity, UserOrder, UserShipment, Warehouse } from '../types';
+import { OrderValidity, ShipmentBreakdown, UserOrder, UserShipment, Warehouse } from '../types';
 
 const MAX_SHIPPING_COST_THRESHOLD = 0.15;
 
@@ -10,10 +10,11 @@ export const calculateShippingCost = (shipment: UserShipment): number => {
 
 export const checkOrderValidity = (order: UserOrder, warehouses: Warehouse[]): OrderValidity => {
   if (order.quantity === 0) {
-    return { isValid: false, totalShippingCost: 0 };
+    return { isValid: false, totalShippingCost: 0, shipments: [] };
   }
 
   const destination = { latitude: order.latitude, longitude: order.longitude };
+  const shipments: ShipmentBreakdown[] = [];
   let remainingQuantity = order.quantity;
   let totalShippingCost = 0;
 
@@ -30,6 +31,10 @@ export const checkOrderValidity = (order: UserOrder, warehouses: Warehouse[]): O
 
     const origin = { latitude: warehouse.latitude, longitude: warehouse.longitude };
     const quantity = Math.min(warehouse.stock, remainingQuantity);
+    if (quantity <= 0) {
+      continue;
+    }
+
     const shipment: UserShipment = {
       origin,
       destination,
@@ -39,15 +44,23 @@ export const checkOrderValidity = (order: UserOrder, warehouses: Warehouse[]): O
     };
 
     const shippingCost = calculateShippingCost(shipment);
+    shipments.push({
+      warehouseId: warehouse.id,
+      warehouseName: warehouse.name,
+      rateId: warehouse.rate_id,
+      rate: warehouse.cost_per_kg_km,
+      quantity,
+      cost: shippingCost,
+    });
     totalShippingCost += shippingCost;
     remainingQuantity -= quantity;
   }
 
   // If there is still unfulfilled quantity, the order is invalid
   if (remainingQuantity > 0) {
-    return { isValid: false, totalShippingCost: 0 };
+    return { isValid: false, totalShippingCost: 0, shipments: [] };
   }
 
   const maxAllowedShippingCost = order.total * MAX_SHIPPING_COST_THRESHOLD;
-  return { isValid: totalShippingCost <= maxAllowedShippingCost, totalShippingCost };
+  return { isValid: totalShippingCost <= maxAllowedShippingCost, totalShippingCost, shipments };
 };
