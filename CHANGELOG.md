@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/abhinavmsra/oms-engine/compare/v1.0.1...v1.1.0) (2025-01-14)
+
+
+### Features
+
+* [ISSUE-7] add /api/orders/verify endpoint ([#10](https://github.com/abhinavmsra/oms-engine/issues/10)) ([f068ac9](https://github.com/abhinavmsra/oms-engine/commit/f068ac97fbbd27ffa372b4b401a288fd142e3afa))
+
 ## [1.0.1](https://github.com/abhinavmsra/oms-engine/compare/v1.0.0...v1.0.1) (2025-01-13)
 
 
