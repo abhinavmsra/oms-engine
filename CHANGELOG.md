@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/abhinavmsra/oms-engine/compare/v1.1.0...v1.2.0) (2025-01-14)
+
+
+### Features
+
+* [ISSUE:8] create POST /orders endpoint ([#11](https://github.com/abhinavmsra/oms-engine/issues/11)) ([c0293c7](https://github.com/abhinavmsra/oms-engine/commit/c0293c7dc94f26f7f7cb48d630b2d5f242cf5d8d))
+
 # [1.1.0](https://github.com/abhinavmsra/oms-engine/compare/v1.0.1...v1.1.0) (2025-01-14)
 
 

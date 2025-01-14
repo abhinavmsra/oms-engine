@@ -1,6 +1,6 @@
 {
   "name": "oms-engine",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "oms-engine is a backend system designed for efficient order management and validation.",
   "main": "src/index.ts",
   "engines": {
