@@ -122,8 +122,20 @@ export type VerifyParams = {
   longitude: string;
 };
 
-export type ValidatedVerifyParams = {
-  count: number;
-  latitude: number;
-  longitude: number;
+export type OrderSummary = {
+  subtotal: number;
+  total: number;
+  quantity: number;
+};
+
+export type OrderSummaryWithShipments = OrderSummary & {
+  shipments: OrderSummaryShipmentItem[];
+};
+
+export type OrderSummaryShipmentItem = {
+  id: number;
+  total_shipment_cost: number;
+  quantity: number;
+  warehouse_name: string;
+  cost_per_kg_km: number;
 };

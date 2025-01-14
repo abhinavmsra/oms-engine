@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Joi from 'joi';
 import * as dbOrders from '../db/orders';
-import { UserOrder, ValidatedVerifyParams, VerifyParams } from '../types';
+import { UserOrder, VerifyParams } from '../types';
 import { checkOrderValidity } from '../utils/order';
 import { calculateOrderSummary, fetchOrderData } from '../services/orders';
 import { serializeOrder, serializeOrderVerification } from '../serializers/order';
@@ -12,16 +12,21 @@ const orderRequestSchema = Joi.object({
   longitude: Joi.number().required(),
 }).prefs({ convert: true });
 
-const validateOrderRequest = (data: VerifyParams): ValidatedVerifyParams => {
-  const { error, value } = orderRequestSchema.validate(data);
-  if (error) {
-    throw new Error(`Validation Error: ${error.details.map(d => d.message).join(', ')}`);
-  }
-  return value;
-};
-
 export const verify = async (req: Request<VerifyParams>, res: Response): Promise<void> => {
-  const validation = validateOrderRequest(req.query as VerifyParams);
+  const { error, value: validation } = orderRequestSchema.validate(req.query);
+  if (error) {
+    res.status(400).json({
+      errors: [
+        {
+          status: 400,
+          source: { pointer: error.details[0].path[0] },
+          title: 'Validation Error',
+          detail: error.details[0].message,
+        },
+      ],
+    });
+    return;
+  }
 
   const { product, discountRule, warehouses } = await fetchOrderData(validation.count);
 
@@ -45,7 +50,20 @@ export const verify = async (req: Request<VerifyParams>, res: Response): Promise
 };
 
 export const create = async (req: Request<VerifyParams>, res: Response): Promise<void> => {
-  const validation = validateOrderRequest(req.body as VerifyParams);
+  const { error, value: validation } = orderRequestSchema.validate(req.query);
+  if (error) {
+    res.status(400).json({
+      errors: [
+        {
+          status: 400,
+          source: { pointer: error.details[0].path[0] },
+          title: 'Validation Error',
+          detail: error.details[0].message,
+        },
+      ],
+    });
+    return;
+  }
 
   const { product, discountRule, warehouses } = await fetchOrderData(validation.count);
   const { subtotal, total } = calculateOrderSummary(

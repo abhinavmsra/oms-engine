@@ -4,8 +4,6 @@ import * as dbWarehouses from '../db/warehouses';
 
 export const fetchOrderData = async (count: number) => {
   const product = await dbProducts.findByID(1); // FIXME: Consider making product dynamic later
-  if (!product) throw new Error('Product not found');
-
   const discountRule = await dbPromotionRules.findByNearestMinQty(count);
   const warehouses = await dbWarehouses.findAll();
 
