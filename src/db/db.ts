@@ -42,3 +42,26 @@ export const query = async (
     throw error;
   }
 };
+
+export const runTransaction = async (
+  callback: (client: PoolClient) => Promise<QueryResult>,
+): Promise<QueryResult> => {
+  const client = await getClient();
+  let result: QueryResult;
+
+  try {
+    await client.query('BEGIN');
+    result = await callback(client);
+    await client.query('COMMIT');
+  }
+  catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Transaction failed:', error);
+    throw error;
+  }
+  finally {
+    client.release();
+  }
+
+  return result;
+};

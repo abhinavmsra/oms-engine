@@ -8,6 +8,7 @@ export const findAll = async (): Promise<Warehouse[]> => {
       warehouses.name,
       locations.latitude,
       locations.longitude,
+      warehouse_shipping_rates.id AS rate_id,
       warehouse_shipping_rates.cost_per_kg_km,
       stocks.amount AS stock
     FROM warehouses

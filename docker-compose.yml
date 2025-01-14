@@ -7,6 +7,8 @@ services:
     environment:
       DATABASE_URL: postgres://app:5432@db/oms_development
       APP_PORT: 3000
+    ports:
+      - 127.0.0.1:3000:3000
     command: tail -f /dev/null
 
   db:

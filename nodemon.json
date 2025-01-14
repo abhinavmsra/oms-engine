@@ -2,5 +2,8 @@
   "verbose": true,
   "execMap": {
     "ts": "ts-node"
-  }
+  },
+  "watch": [
+    "./src/"
+  ]
 }
