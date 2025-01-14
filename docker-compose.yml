@@ -23,3 +23,12 @@ services:
       - 127.0.0.1:5432:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./docs:/app
+    environment:
+      - SWAGGER_JSON=/app/apidocs.yml
+    ports:
+      - 127.0.0.1:8080:8080
