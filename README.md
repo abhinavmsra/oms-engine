@@ -48,6 +48,7 @@ The project is organized into the following directories and files:
   ├── release.config.js        # Semantic release configuration
   └── tsconfig.json            # TypeScript configuration
 ```
+---
 
 ### 🐳 Getting Started with Docker
 
@@ -118,11 +119,14 @@ This step seeds the database with initial data for development purposes.
     - Uses the `psql` command-line tool to import the seed data from `src/seeds.sql` into the `oms_development` database.
     - The seed data includes sample products, warehouses, and shipping rates.
 
+---
 
 ### 🧪 Running Tests
 ```bash
 pnpm run test
 ```
+
+---
 
 ### 📖 API Documentation Access
 
@@ -141,9 +145,21 @@ The API documentation is served using a Swagger UI container. To access the docu
 
 Ensure `apidocs.yml` file is up to date. It is managed manually for now.
 
-### 🚀 Deployment
+---
 
-To deploy the OMS system, you can use services like:
-	- Heroku
-	- DigitalOcean
-	- AWS ECS / Lambda
+### 🚀 Deployment Information
+
+The application has been successfully deployed on AWS EC2. Below are the access details for the live services:
+
+- Application Server (API):
+
+    👉 http://ec2-54-169-215-138.ap-southeast-1.compute.amazonaws.com:3000
+
+- Swagger API Documentation:
+
+    👉 http://ec2-54-169-215-138.ap-southeast-1.compute.amazonaws.com:8080
+
+- Server Details:
+  - Region: ap-southeast-1 (Singapore)
+  - Instance Type: EC2 Instance
+  - Security: API and Swagger endpoints exposed on ports 3000 and 8080 respectively.

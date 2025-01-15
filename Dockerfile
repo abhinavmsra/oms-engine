@@ -3,16 +3,6 @@
 # ========================
 FROM node:latest AS base
 
-# Install PostgreSQL Client, Rust, and SQLx CLI
-RUN apt update -y \
-  && apt upgrade -y \
-  && apt-get install -y --no-install-recommends postgresql-client curl \
-  && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
-  && export PATH="$HOME/.cargo/bin:$PATH" \
-  && rustc --version \
-  && cargo --version \
-  && cargo install sqlx-cli --no-default-features --features native-tls,postgres
-
 # Enable and configure PNPM
 RUN corepack enable pnpm && corepack use pnpm@latest-10
 
@@ -25,6 +15,16 @@ FROM base AS dev
 
 ENV NODE_ENV=development
 ENV APP_ENV=development
+
+# Install PostgreSQL Client, Rust, and SQLx CLI
+RUN apt update -y \
+  && apt upgrade -y \
+  && apt-get install -y --no-install-recommends postgresql-client curl \
+  && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+  && export PATH="$HOME/.cargo/bin:$PATH" \
+  && rustc --version \
+  && cargo --version \
+  && cargo install sqlx-cli --no-default-features --features native-tls,postgres
 
 CMD ["tail", "-f /dev/null"]
 

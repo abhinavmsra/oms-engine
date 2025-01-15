@@ -11,6 +11,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local Development Server
+  - url: http://ec2-54-169-215-138.ap-southeast-1.compute.amazonaws.com:3000
+    description: Production Server
 
 defaultContentType: application/json
 
