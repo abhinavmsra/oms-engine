@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_DB: oms_production
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - ./pgdata_prod:/var/lib/postgresql/data
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      target: prod
+    environment:
+      DATABASE_URL: postgres://app:5432@db/oms_production
+      APP_PORT: 3000
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      - db
+
+  migrations:
+    build:
+      dockerfile: Dockerfile.sqlx
+    environment:
+      DATABASE_URL: postgres://app:5432@db/oms_production
+    depends_on:
+      - db
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./docs:/app
+    environment:
+      - SWAGGER_JSON=/app/apidocs.yml
+    ports:
+      - 127.0.0.1:8080:8080
