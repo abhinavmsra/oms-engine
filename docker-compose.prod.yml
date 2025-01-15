@@ -20,7 +20,7 @@ services:
       DATABASE_URL: postgres://app:5432@db/oms_production
       APP_PORT: 3000
     ports:
-      - 127.0.0.1:3000:3000
+      - 3000:3000
     depends_on:
       - db
 
@@ -39,4 +39,4 @@ services:
     environment:
       - SWAGGER_JSON=/app/apidocs.yml
     ports:
-      - 127.0.0.1:8080:8080
+      - 8080:8080
