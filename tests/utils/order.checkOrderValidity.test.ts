@@ -4,8 +4,28 @@ import { OrderValidity, UserOrder, Warehouse } from '../../src/types';
 
 describe('checkOrderValidity', () => {
   const warehouses: Warehouse[] = [
-    { id: 1, name: 'Los Angeles', cost_per_kg_km: 0.01, stock: 30, latitude: 33.9425, longitude: -118.408056, rate_id: 1, created_at: new Date(), updated_at: new Date() },
-    { id: 2, name: 'New York', cost_per_kg_km: 0.01, stock: 50, latitude: 40.639722, longitude: -73.778889, rate_id: 1, created_at: new Date(), updated_at: new Date() },
+    {
+      id: 1,
+      name: 'Los Angeles',
+      cost_per_kg_km: 0.01,
+      stock: 30,
+      latitude: 33.9425,
+      longitude: -118.408056,
+      rate_id: 1,
+      created_at: new Date(),
+      updated_at: new Date()
+    },
+    {
+      id: 2,
+      name: 'New York',
+      cost_per_kg_km: 0.01,
+      stock: 50,
+      latitude: 40.639722,
+      longitude: -73.778889,
+      rate_id: 1,
+      created_at: new Date(),
+      updated_at: new Date()
+    },
   ];
 
   test('should return valid order when shipping cost is below threshold and stock is sufficient', () => {
@@ -95,8 +115,28 @@ describe('checkOrderValidity', () => {
       longitude: -74.006,
     };
     const warehouses = [
-      { id: 1, name: 'Los Angeles', cost_per_kg_km: 0.01, stock: 0, latitude: 33.9425, longitude: -118.408056, rate_id: 1, created_at: new Date(), updated_at: new Date() },
-      { id: 2, name: 'New York', cost_per_kg_km: 0.01, stock: 0, latitude: 40.639722, longitude: -73.778889, rate_id: 1, created_at: new Date(), updated_at: new Date() },
+      {
+        id: 1,
+        name: 'Los Angeles',
+        cost_per_kg_km: 0.01,
+        stock: 0,
+        latitude: 33.9425,
+        longitude: -118.408056,
+        rate_id: 1,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        id: 2,
+        name: 'New York',
+        cost_per_kg_km: 0.01,
+        stock: 0,
+        latitude: 40.639722,
+        longitude: -73.778889,
+        rate_id: 1,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
     ];
 
     const result: OrderValidity = checkOrderValidity(order, warehouses);

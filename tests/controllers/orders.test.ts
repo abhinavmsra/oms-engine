@@ -21,7 +21,16 @@ const res = expressMock.mockResponse();
 const next = expressMock.mockNext();
 
 const mockProduct = { id: 1, name: 'SCOS', created_at: new Date(), updated_at: new Date(), price: 100, weight: 200 };
-const mockDiscountRule = { id: 1, promotion_id: 1, min_quantity: 1, max_quantity: 100, discount_value: 0.1, is_active: true, created_at: new Date(), updated_at: new Date() };
+const mockDiscountRule = {
+  id: 1,
+  promotion_id: 1,
+  min_quantity: 1,
+  max_quantity: 100,
+  discount_value: 0.1,
+  is_active: true,
+  created_at: new Date(),
+  updated_at: new Date()
+};
 const mockWarehouses: Warehouse[] = [
   {
     id: 1,
@@ -161,7 +170,11 @@ describe('orders#verify', () => {
     test('should return 200 with serialized order data on success', async () => {
       const req = expressMock.mockRequest({ query });
 
-      jest.mocked(fetchOrderData).mockResolvedValue({ product: mockProduct, discountRule: mockDiscountRule, warehouses: mockWarehouses });
+      jest.mocked(fetchOrderData).mockResolvedValue({
+        product: mockProduct,
+        discountRule: mockDiscountRule,
+        warehouses: mockWarehouses
+      });
       jest.mocked(calculateOrderSummary).mockReturnValue({ subtotal: 500, discount: 50, total: 450 });
       jest.mocked(checkOrderValidity).mockReturnValue(mockValidation);
       jest.mocked(serializeOrderVerification).mockReturnValue(serializedOrderVerification);
@@ -248,7 +261,11 @@ describe('orders#create', () => {
       const req = expressMock.mockRequest({ body: query });
 
       jest.mocked(dbOrders.create).mockResolvedValue(mockOrder);
-      jest.mocked(fetchOrderData).mockResolvedValue({ product: mockProduct, discountRule: mockDiscountRule, warehouses: mockWarehouses });
+      jest.mocked(fetchOrderData).mockResolvedValue({
+        product: mockProduct,
+        discountRule: mockDiscountRule,
+        warehouses: mockWarehouses
+      });
       jest.mocked(calculateOrderSummary).mockReturnValue({ subtotal: 500, discount: 50, total: 450 });
       jest.mocked(checkOrderValidity).mockReturnValue(mockValidation);
       jest.mocked(serializeOrder).mockResolvedValue(serializedOrder);
@@ -263,7 +280,11 @@ describe('orders#create', () => {
       const req = expressMock.mockRequest({ body: query });
 
       jest.mocked(dbOrders.create).mockResolvedValue(mockOrder);
-      jest.mocked(fetchOrderData).mockResolvedValue({ product: mockProduct, discountRule: mockDiscountRule, warehouses: mockWarehouses });
+      jest.mocked(fetchOrderData).mockResolvedValue({
+        product: mockProduct,
+        discountRule: mockDiscountRule,
+        warehouses: mockWarehouses
+      });
       jest.mocked(calculateOrderSummary).mockReturnValue({ subtotal: 500, discount: 50, total: 450 });
       jest.mocked(checkOrderValidity).mockReturnValue(mockInValidOrder);
       jest.mocked(serializeOrder).mockResolvedValue(serializedOrder);
