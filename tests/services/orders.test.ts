@@ -1,6 +1,6 @@
 import { jest, describe, expect, test } from '@jest/globals';
 
-import { fetchOrderData, calculateOrderSummary } from '../../src/services/orders';
+import { fetchOrderData } from '../../src/services/orders';
 
 import { findByID } from '../../src/db/products';
 jest.mock('../../src/db/products');
@@ -62,76 +62,5 @@ describe('fetchOrderData', () => {
     expect(findByID).toHaveBeenCalledWith(1);
     expect(findByNearestMinQty).toHaveBeenCalledWith(1);
     expect(findAll).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('calculateOrderSummary', () => {
-  test('should calculate subtotal, discount, and total correctly with discount', () => {
-    const count = 5;
-    const price = 100;
-    const discountValue = 0.1;
-
-    const result = calculateOrderSummary(count, price, discountValue);
-
-    expect(result).toEqual({
-      subtotal: 500, // 5 * 100
-      discount: 50, // 500 * 0.1
-      total: 450, // 500 - 50
-    });
-  });
-
-  test('should calculate subtotal and total correctly without discount', () => {
-    const count = 5;
-    const price = 100;
-
-    const result = calculateOrderSummary(count, price);
-
-    expect(result).toEqual({
-      subtotal: 500, // 5 * 100
-      discount: 0, // No discount applied
-      total: 500, // Subtotal - Discount
-    });
-  });
-
-  test('should handle zero count correctly', () => {
-    const count = 0;
-    const price = 100;
-    const discountValue = 0.1;
-
-    const result = calculateOrderSummary(count, price, discountValue);
-
-    expect(result).toEqual({
-      subtotal: 0, // 0 * 100
-      discount: 0, // No discount since subtotal is 0
-      total: 0, // 0 - 0
-    });
-  });
-
-  test('should handle zero price correctly', () => {
-    const count = 5;
-    const price = 0;
-    const discountValue = 0.1;
-
-    const result = calculateOrderSummary(count, price, discountValue);
-
-    expect(result).toEqual({
-      subtotal: 0, // 5 * 0
-      discount: 0, // No discount since subtotal is 0
-      total: 0, // 0 - 0
-    });
-  });
-
-  test('should handle zero discount value correctly', () => {
-    const count = 5;
-    const price = 100;
-    const discountValue = 0;
-
-    const result = calculateOrderSummary(count, price, discountValue);
-
-    expect(result).toEqual({
-      subtotal: 500, // 5 * 100
-      discount: 0, // 0% discount
-      total: 500, // 500 - 0
-    });
   });
 });

@@ -90,7 +90,18 @@ export const create = async (req: Request<VerifyParams>, res: Response, next: Ne
 
     const validity = checkOrderValidity(userOrder, warehouses);
     if (!validity.isValid) {
-      res.status(400).json({ error: 'Order is invalid' });
+      res.status(400).json({
+        errors: [
+          {
+            status: 400,
+            title: 'Invalid Order',
+            detail: 'The provided order details are invalid.',
+            source: {
+              pointer: ''
+            }
+          }
+        ]
+      });
       return;
     }
 

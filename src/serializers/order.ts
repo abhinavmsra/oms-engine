@@ -16,11 +16,11 @@ export const serializeOrderVerification = (userOrder: UserOrder, validity: Order
     relationships: {
       shipments: validity.isValid
         ? validity.shipments.map(shipment => ({
-            cost_per_kg_km: shipment.rate,
-            total_shipment_cost: shipment.cost,
-            quantity: shipment.quantity,
-            warehouse: shipment.warehouseName,
-          }))
+          cost_per_kg_km: shipment.rate,
+          total_shipment_cost: shipment.cost,
+          quantity: shipment.quantity,
+          warehouse: shipment.warehouseName,
+        }))
         : [],
     },
   },
@@ -35,7 +35,7 @@ export const serializeOrder = async (order: Order) => {
 
   return {
     data: {
-      type: 'order',
+      type: 'orders',
       id: order.id,
       attributes: {
         order_number: order.order_number,
