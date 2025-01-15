@@ -25,8 +25,16 @@ A prototype Order Management System (OMS) built with Node.js and PostgreSQL, sup
 The project is organized into the following directories and files:
 ```
   ├── src/
-  │   ├── migrations/          # Hosts database migration files
-  │   └── seeds.sql            # Database seed data for development database
+  |     ├── controllers/       # Handles incoming API requests and calls appropriate services
+  |     ├── db/                # Database connection, models, and query helpers
+  |     ├── migrations/        # SQL migration scripts for schema changes
+  |     ├── routes/            # API route definitions and middleware integration
+  |     ├── serializers/       # Handles data serialization and API response formatting
+  |     ├── services/          # Business logic and core processing
+  |     ├── types/             # TypeScript types and interfaces
+  |     ├── utils/             # Utility functions and reusable helpers
+  |     ├── seeds.sql          # Seed data for initializing the database
+  |     └── index.ts           # Entry point for the Express server
   ├── tests/                   # Unit and Integration Tests
   ├── db_erd.png               # ERD diagram for the database schema
   ├── docker-compose.yml       # Docker Compose for local dev setup
