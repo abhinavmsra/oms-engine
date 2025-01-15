@@ -1,0 +1,12 @@
+FROM rust:latest
+
+RUN apt update -y \
+  && apt upgrade -y \
+  && apt-get install -y --no-install-recommends postgresql-client curl \
+  && cargo install sqlx-cli --no-default-features --features native-tls,postgres
+
+COPY src/migrations ./app/migrations
+
+WORKDIR /app
+
+CMD ["sqlx", "migrate", "run"]
