@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/abhinavmsra/oms-engine/compare/v1.2.1...v1.2.2) (2025-01-15)
+
+
+### Bug Fixes
+
+* [ISSUE-13] add Docker support for production builds ([#14](https://github.com/abhinavmsra/oms-engine/issues/14)) ([9eabe2c](https://github.com/abhinavmsra/oms-engine/commit/9eabe2c3ceabe16ad65849ee5a2079292beb3bed))
+
 ## [1.2.1](https://github.com/abhinavmsra/oms-engine/compare/v1.2.0...v1.2.1) (2025-01-14)
 
 
