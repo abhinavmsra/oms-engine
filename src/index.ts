@@ -19,6 +19,19 @@ app.use(cors());
 app.use('/api', healthCheckRouter); // Health check endpoint
 app.use('/api/v1/orders', ordersRouter); // orders endpoint
 
+// Catch-All Route for 404 Errors
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    errors: [
+      {
+        status: 404,
+        title: 'Not Found',
+        detail: `The requested URL ${req.originalUrl} was not found on this server.`,
+      },
+    ],
+  });
+});
+
 // Centralized Error Handling Middleware
 app.use((err: Error, _req: Request, res: Response) => {
   console.error('Unhandled error:', err);

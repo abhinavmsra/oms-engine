@@ -32,6 +32,7 @@
     "@types/haversine": "^1.1.8",
     "@types/jest": "^29.5.14",
     "@types/morgan": "^1.9.9",
+    "@types/node": "^22.10.6",
     "@types/pg": "^8.11.10",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
