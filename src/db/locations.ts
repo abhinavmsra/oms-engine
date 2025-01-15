@@ -2,7 +2,11 @@ import { PoolClient, QueryResult } from 'pg';
 import { Location } from '../types';
 import { query } from './db';
 
-export const findByLatitudeAndLongitude = async (latitude: number, longitude: number, client?: PoolClient | null): Promise<Location> => {
+export const findByLatitudeAndLongitude = async (
+  latitude: number,
+  longitude: number,
+  client?: PoolClient | null
+): Promise<Location> => {
   const rawQuery = 'SELECT * FROM locations WHERE latitude = $1 AND longitude = $2';
 
   const result: QueryResult<Location> = client
@@ -12,7 +16,11 @@ export const findByLatitudeAndLongitude = async (latitude: number, longitude: nu
   return result.rows[0];
 };
 
-export const create = async (latitude: number, longitude: number, client?: PoolClient | null): Promise<Location> => {
+export const create = async (
+  latitude: number,
+  longitude: number,
+  client?: PoolClient | null
+): Promise<Location> => {
   const rawQuery = 'INSERT INTO locations (latitude, longitude) VALUES ($1, $2) RETURNING *';
   const result: QueryResult<Location> = client
     ? await client.query(rawQuery, [latitude, longitude])
@@ -21,7 +29,11 @@ export const create = async (latitude: number, longitude: number, client?: PoolC
   return result.rows[0];
 };
 
-export const findOrInsert = async (latitude: number, longitude: number, client?: PoolClient | null): Promise<Location> => {
+export const findOrInsert = async (
+  latitude: number,
+  longitude: number,
+  client?: PoolClient | null
+): Promise<Location> => {
   let record = await findByLatitudeAndLongitude(latitude, longitude, client);
   if (!record) {
     record = await create(latitude, longitude, client);

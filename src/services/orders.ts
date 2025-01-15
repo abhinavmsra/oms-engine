@@ -9,10 +9,3 @@ export const fetchOrderData = async (count: number) => {
 
   return { product, discountRule, warehouses };
 };
-
-export const calculateOrderSummary = (count: number, price: number, discountValue?: number): { subtotal: number; discount: number; total: number } => {
-  const subtotal = count * price;
-  const discount = discountValue ? subtotal * discountValue : 0;
-  const total = subtotal - discount;
-  return { subtotal, discount, total };
-};

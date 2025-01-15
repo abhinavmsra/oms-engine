@@ -12,11 +12,15 @@ const gitignorePath = path.resolve(__dirname, '.gitignore');
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  stylistic.configs.customize({
-    indent: 2,
-    quotes: 'single',
-    semi: true,
-  }),
+  {
+    plugins: { '@stylistic': stylistic },
+    rules: {
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/quotes': ['error', 'single'],
+      '@stylistic/max-len': ['error', { 'code': 120, 'tabWidth': 2, 'ignoreComments': true }],
+      '@stylistic/semi': ['error', 'always']
+    }
+  },
   includeIgnoreFile(gitignorePath),
   { files: ['./src/**/*.{js,mjs,cjs,ts}'] },
   {

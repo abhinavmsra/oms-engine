@@ -3,6 +3,17 @@ import { OrderValidity, ShipmentBreakdown, UserOrder, UserShipment, Warehouse } 
 
 const MAX_SHIPPING_COST_THRESHOLD = 0.15;
 
+export const calculateOrderSummary = (
+  count: number,
+  price: number,
+  discountValue?: number
+): { subtotal: number; discount: number; total: number } => {
+  const subtotal = count * price;
+  const discount = discountValue ? subtotal * discountValue : 0;
+  const total = subtotal - discount;
+  return { subtotal, discount, total };
+};
+
 export const calculateShippingCost = (shipment: UserShipment): number => {
   const distance = haversine(shipment.destination, shipment.origin, { unit: 'km' });
   return shipment.quantity * (shipment.weightPerUnit / 1_000) * Math.abs(distance) * shipment.ratePerKgPerKm;

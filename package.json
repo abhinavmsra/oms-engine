@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon src/index.ts",
-    "lint": "eslint --debug .",
+    "lint": "eslint .",
     "build": "tsc",
     "test": "jest"
   },

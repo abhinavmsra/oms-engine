@@ -118,7 +118,7 @@ describe('serializeOrder', () => {
     const response = await serializeOrder(mockOrder);
     expect(response).toMatchObject({
       data: {
-        type: 'order',
+        type: 'orders',
         id: mockOrder.id,
         attributes: {
           order_number: mockOrder.order_number,
