@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/abhinavmsra/oms-engine/compare/v1.2.2...v1.2.3) (2025-01-15)
+
+
+### Bug Fixes
+
+* [ISSUE-15] handle 404 routes ([#16](https://github.com/abhinavmsra/oms-engine/issues/16)) ([fdbf2e0](https://github.com/abhinavmsra/oms-engine/commit/fdbf2e07b8114501b50d69706b8bf5ddc265f3c0))
+
 ## [1.2.2](https://github.com/abhinavmsra/oms-engine/compare/v1.2.1...v1.2.2) (2025-01-15)
 
 
