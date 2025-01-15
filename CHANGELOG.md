@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/abhinavmsra/oms-engine/compare/v1.2.3...v1.2.4) (2025-01-15)
+
+
+### Bug Fixes
+
+* update readme ([#17](https://github.com/abhinavmsra/oms-engine/issues/17)) ([ec21cd2](https://github.com/abhinavmsra/oms-engine/commit/ec21cd22ebb84888a0875872bbb63059abf49719))
+
 ## [1.2.3](https://github.com/abhinavmsra/oms-engine/compare/v1.2.2...v1.2.3) (2025-01-15)
 
 
